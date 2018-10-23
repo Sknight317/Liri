@@ -32,7 +32,11 @@ console.log(spotify);
         if (err) {
           return console.log('Error occurred: ' + err);
         }
+
        
-      console.log(data.tracks.items); 
+      console.log("The song's name is: " + JSON.stringify(data.tracks.items[0].name));
+      console.log("The song's artist: " + JSON.stringify(data.tracks.items[0].album.artists[0].name));
+      console.log("Preview Link: " + JSON.stringify(data.tracks.items[0].preview_url));
+      console.log("Album: " + JSON.stringify(data.tracks.items[0].album.name)); 
       });
     }
