@@ -14,14 +14,25 @@ console.log("--------------------------");
 
 
 
+
+
+// Takes in all of the command line arguments
+var inputString = process.argv;
+
+// Parses the command line argument to capture the option that the user wants
+var option = inputString[2];
+var songName = inputString[3];
+if(option === "spotify-this-song") {
+    
 var Spotify = require('node-spotify-api');
 // variable to access keys info
 var spotify = new Spotify(stuff.spotify);
 console.log(spotify);
-spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
-    if (err) {
-      return console.log('Error occurred: ' + err);
+    spotify.search({ type: 'track', query: songName, limit: 1 }, function(err, data) {
+        if (err) {
+          return console.log('Error occurred: ' + err);
+        }
+       
+      console.log(data.tracks.items); 
+      });
     }
-   
-  console.log(data); 
-  });
