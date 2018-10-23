@@ -21,11 +21,11 @@ var inputString = process.argv;
 
 // Parses the command line argument to capture the option that the user wants
 var option = inputString[2];
-var songName = inputString[3];
+var songName = inputString.slice(3).join(" ");
 if(option === "spotify-this-song") {
     
 var Spotify = require('node-spotify-api');
-// variable to access keys info
+// variable to access Spotify key info
 var spotify = new Spotify(stuff.spotify);
 console.log(spotify);
     spotify.search({ type: 'track', query: songName, limit: 1 }, function(err, data) {
