@@ -40,3 +40,21 @@ console.log(spotify);
       console.log("Album: " + JSON.stringify(data.tracks.items[0].album.name)); 
       });
     }
+
+    var option = inputString[2];
+    var movieName = inputString.slice(3).join(" ");
+
+    if(option === "movie-this") {
+        // Then run a request to the OMDB API with the movie specified
+    request("http://www.omdbapi.com/?" + "t=" + movieName + "=&plot=short&apikey=trilogy", function(error, response, body) {
+
+    // If the request is successful (i.e. if the response status code is 200)
+    if (!error && response.statusCode === 200) {
+  
+      // Parse the body of the site and recover just the imdbRating
+      // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
+      console.log(JSON.parse(body));
+    }
+  });
+  
+    }
