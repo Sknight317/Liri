@@ -22,7 +22,31 @@ var inputString = process.argv;
 // Parses the command line argument to capture the option that the user wants
 var option = inputString[2];
 var songName = inputString.slice(3).join(" ");
-if(option === "spotify-this-song") {
+var movieName = inputString.slice(3).join(" ");
+var ArtistName = inputString.slice(3).join(" ");
+// We will then create a switch-case statement (if-else would also work).
+// The switch-case will direct which function gets run.
+switch (option) {
+  case "spotify-this-song":
+    spotify();
+    break;
+  
+  case "movie-this":
+    movie();
+    break;
+  
+  case "concert-this":
+    concert();
+    break;
+  
+  case "do-what-it-says":
+    DoWhat();
+    break;
+  }
+
+function spotify() {
+var songName = inputString.slice(3).join(" ");
+
     
 var Spotify = require('node-spotify-api');
 // variable to access Spotify key info
@@ -39,12 +63,14 @@ console.log(spotify);
       console.log("Preview Link: " + JSON.stringify(data.tracks.items[0].preview_url));
       console.log("Album: " + JSON.stringify(data.tracks.items[0].album.name)); 
       });
-    }
+    
+  }
 
+function movie() {
     var option = inputString[2];
     var movieName = inputString.slice(3).join(" ");
 
-    if(option === "movie-this") {
+    
         // Then run a request to the OMDB API with the movie specified
     request("http://www.omdbapi.com/?" + "t=" + movieName + "=&plot=short&apikey=trilogy", function(error, response, body) {
 
@@ -53,7 +79,7 @@ console.log(spotify);
   
       // Parse the body of the site and recover just the imdbRating
       // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-      console.log(JSON.parse(body));
+      // console.log(JSON.parse(body));
       console.log("Title: " + JSON.parse(body).Title);
       console.log("Year: " + JSON.parse(body).Year);
       console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
@@ -65,12 +91,14 @@ console.log(spotify);
     }
   });
   
-    }
+    
+  }
 
+function concert() {
 var option = inputString[2];
 var ArtistName = inputString.slice(3).join(" ");
 var string1 = "";
-if(option === "concert-this") {
+
  // Then run a request to the OMDB API with the movie specified
  request("https://rest.bandsintown.com/artists/" + ArtistName + "/events?app_id=codingbootcamp", function(error, response, body) {
 
@@ -98,39 +126,43 @@ if(option === "concert-this") {
     // }
   }    
 });
- }
+ 
+}
 
-const fs = require('fs-extra')
-if (option === "do-what-it-says") {
-// Async with promises:
-fs.copy('./random.txt')
-  .then(() => console.log('success!'))
-  .catch(err => console.error(err))
- 
-// Async with callbacks:
-fs.copy('./random.txt', err => {
-  if (err) return console.error(err)
-  console.log('success!')
-})
- 
-// Sync:
-try {
-  fs.copySync('./random.txt')
-  console.log('success!')
-} catch (err) {
-  console.error(err)
-}
- 
-// Async/Await:
-async function copyFiles () {
-  try {
-    await fs.copy('./random.txt')
-    console.log('success!')
-  } catch (err) {
-    console.error(err)
+function DoWhat() {
+
+// Running the readFile module that's inside of fs.
+// Includes the fs package for reading and writing packages
+const fs = require('fs-extra');
+fs.readFile("random.txt", "utf8", function(err, data) {
+  if (err) {
+    return console.log(err);
   }
+// Break string down by comma separation
+// var output = data.split(",");
+var [a,b] = data.split(",");
+  console.log([a,b])
+// Loop through new array
+// for (var i = 0; i < output.length; i++) {
+
+  // Print each element (item) of the array/
+//   console.log(output[i]);
+  
+// }
+if(a === "spotify-this-song") {
+console.log(a);
+var b = songName;
+console.log(songName);
+spotify();
+
 }
- 
-copyFiles()
+if (a === "movie-this") {
+  console.log(a);
+  var b = movieName;
+  console.log(movieName);
+  movie();
+}
+
+});
 
 }
