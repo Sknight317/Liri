@@ -12,7 +12,8 @@ console.log("ALL THE STUFF I NEED");
 console.log(stuff);
 console.log("--------------------------");
 
-
+// Variable to require moment.js
+var moment = require('moment');
 
 
 
@@ -45,7 +46,7 @@ switch (option) {
   }
 
 function spotify() {
-var songName = inputString.slice(3).join(" ");
+// var songName = inputString.slice(3).join(" ");
 
     
 var Spotify = require('node-spotify-api');
@@ -109,14 +110,16 @@ var string1 = "";
       //  string1 += response.body[venue];
      
       // Parse the body of the site 
-      var location = JSON.parse(response.body)[1].venue.name;
+      
       
       console.log("Venue Name: " + (JSON.parse(response.body)[1].venue.name));
       console.log("Venue Location: " + (JSON.parse(response.body)[1].venue.city) + ", " + (JSON.parse(response.body)[1].venue.region));
       var datetime = (JSON.parse(response.body)[1].datetime);
-      var date = datetime.split("T");
-      
-      console.log("Date of Event: " + date);
+      // Sets variable equal to an array, and splits the date and time at the "T"; sends each piece to 2 different variables
+      var [date,b] = datetime.split("T");
+      // Uses momemnt.js to reformat the date
+      var newDate = moment(date).format('dddd, ' + 'MMMM Do YYYY')
+      console.log("Date of Event: " + newDate);
       console.log("------------------------------")
       
       // console.log("Venue Name: " + (response.body)[i].venue.name +
@@ -141,7 +144,9 @@ fs.readFile("random.txt", "utf8", function(err, data) {
 // Break string down by comma separation
 // var output = data.split(",");
 var [a,b] = data.split(",");
-  console.log([a,b])
+  console.log([a,b]);
+// b.split("\"");
+// console.log("new b:" + b)
 // Loop through new array
 // for (var i = 0; i < output.length; i++) {
 
@@ -150,16 +155,23 @@ var [a,b] = data.split(",");
   
 // }
 if(a === "spotify-this-song") {
-console.log(a);
-var b = songName;
-console.log(songName);
+console.log("a: " + a);
+console.log("b: " +b);
+var songName = b;
+console.log("Song: " + songName);
+console.log("------------------")
 spotify();
-
 }
 if (a === "movie-this") {
   console.log(a);
   var b = movieName;
   console.log(movieName);
+  movie();
+}
+if (a === "concert-this") {
+  console.log(a);
+  var b = ArtistName;
+  console.log(ArtistName);
   movie();
 }
 
