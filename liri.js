@@ -23,6 +23,7 @@ var inputString = process.argv;
 // Parses the command line argument to capture the option that the user wants
 var option = inputString[2];
 var songName = inputString.slice(3).join(" ");
+
 var movieName = inputString.slice(3).join(" ");
 var ArtistName = inputString.slice(3).join(" ");
 // We will then create a switch-case statement (if-else would also work).
@@ -37,22 +38,23 @@ switch (option) {
     break;
   
   case "concert-this":
-    concert();
+    concert(ArtistName);
     break;
   
   case "do-what-it-says":
-    DoWhat();
+    DoWhatit();
     break;
   }
 
-function spotify() {
+function spotify(songName) {
 // var songName = inputString.slice(3).join(" ");
 
-    
+  
 var Spotify = require('node-spotify-api');
 // variable to access Spotify key info
 var spotify = new Spotify(stuff.spotify);
 console.log(spotify);
+
     spotify.search({ type: 'track', query: songName, limit: 1 }, function(err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
@@ -64,12 +66,12 @@ console.log(spotify);
       console.log("Preview Link: " + JSON.stringify(data.tracks.items[0].preview_url));
       console.log("Album: " + JSON.stringify(data.tracks.items[0].album.name)); 
       });
-    
+     
   }
 
-function movie() {
-    var option = inputString[2];
-    var movieName = inputString.slice(3).join(" ");
+function movie(movieName) {
+    // var option = inputString[2];
+    // var movieName = inputString.slice(3).join(" ");
 
     
         // Then run a request to the OMDB API with the movie specified
@@ -95,10 +97,10 @@ function movie() {
     
   }
 
-function concert() {
-var option = inputString[2];
-var ArtistName = inputString.slice(3).join(" ");
-var string1 = "";
+function concert(ArtistName) {
+// var option = inputString[2];
+// var ArtistName = inputString.slice(3).join(" ");
+// var string1 = "";
 
  // Then run a request to the OMDB API with the movie specified
  request("https://rest.bandsintown.com/artists/" + ArtistName + "/events?app_id=codingbootcamp", function(error, response, body) {
@@ -132,7 +134,7 @@ var string1 = "";
  
 }
 
-function DoWhat() {
+function DoWhatit() {
 
 // Running the readFile module that's inside of fs.
 // Includes the fs package for reading and writing packages
@@ -154,27 +156,29 @@ var [a,b] = data.split(",");
 //   console.log(output[i]);
   
 // }
-if(a === "spotify-this-song") {
-console.log("a: " + a);
-console.log("b: " +b);
-var songName = b;
-console.log("Song: " + songName);
-console.log("------------------")
-spotify();
-}
-if (a === "movie-this") {
-  console.log(a);
-  var b = movieName;
-  console.log(movieName);
-  movie();
-}
-if (a === "concert-this") {
-  console.log(a);
-  var b = ArtistName;
-  console.log(ArtistName);
-  movie();
-}
+switch (a) {
+case "spotify-this-song":
 
+// var songName = b;
+// console.log(b);
+console.log("------------------")
+spotify(b);
+break;
+
+case "movie-this":
+  
+  // var movieName = b;
+  // console.log(b);
+  console.log("------------------");
+  movie(b);
+break;
+
+case "concert-this":
+
+  console.log("------------------");
+  concert(b);
+break;
+}
 });
 
 }
