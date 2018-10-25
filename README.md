@@ -1,6 +1,6 @@
 # Liri
 
-This is an app I created using node.js called LIRI Bot. The application is able to take in user input through the command line and bring the user back data uses several APIs. This app uses Spotify for songs, Bands in Town for concerts, and OMDB for movies.
+This is an app I created using node.js called LIRI Bot. The application is able to take in user input through the command line and bring the user back data using several APIs. This app uses Spotify for songs, Bands in Town for concerts, and OMDB for movies.
 
 The liri.js file is the main JavaScript file with the code to make the application run. Within this file, I have created four different functions. Each function returns different data depending on the information the user types in the command line. User informtion is captured using process.argv. I then created a switch-case statement to have each function run when the user types in a certain option.
 
