@@ -12,6 +12,4 @@ When the user types concert-this and the name of a singer/artist, the user will 
 
 When the user types do-what-it-says, the DoWhatit function will be run. This function uses the fs node package to read the text inside of the random.txt file and run the command that is typed.
 
-<video width="320" height="240" controls>
-  <source src="./video.mp4" type="video/mp4">
-</video>
+[![Watch the video](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](https://youtu.be/K92Si8RX3lE)
