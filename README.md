@@ -13,4 +13,5 @@ When the user types concert-this and the name of a singer/artist, the user will 
 When the user types do-what-it-says, the DoWhatit function will be run. This function uses the fs node package to read the text inside of the random.txt file and run the command that is typed.
 
 [![Watch the video](https://img.youtube.com/vi/K92Si8RX3lE/0.jpg)](https://youtu.be/K92Si8RX3lE)
+<br>
 **Click the picture to watch the video.**
