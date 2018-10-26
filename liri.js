@@ -28,18 +28,35 @@ var songName = inputString.slice(3).join(" ");
 var movieName = inputString.slice(3).join(" ");
 var artistName = inputString.slice(3).join(" ");
 
+//If there is no song name; search for the song: The Sign
+if (!songName) {
+  songName = "The Sign";
+}
+
+//If there is no movie name;search for the movie Mr. Nobody.
+if (!movieName) {
+  movieName = "Mr. Nobody";
+}
+
+//If there is no artist or singer name 
+if(!artistName) {
+  console.log("Sorry you did not pick an artist or singer to search.")
+}
 //switch-case statement 
 switch (option) {
   case "spotify-this-song":
+  console.log("Searching for Song");
     spotify(songName);
     break;
   
   case "movie-this":
     movie(movieName);
+    console.log("Searching for Movie");
     break;
   
   case "concert-this":
     concert(artistName);
+    console.log("Searching for Concert");
     break;
   
   case "do-what-it-says":
